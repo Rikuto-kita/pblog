@@ -15,6 +15,7 @@
           {{ object.content }}
         </p>
         <a href="{% url 'myapp:post_update' object.id %}" class="btn btn-primary">編集</a>
+        <a href="{% url 'myapp:post_delete' object.id %}" class="btn btn-danger">削除</a>
       </div>
     </div>
     <!--Card-->
