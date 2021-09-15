@@ -29,70 +29,37 @@
 
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <!-- Navbar brand  -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="/">
+          <!-- hrefに/を入れるとトップページに遷移できる -->
           Python Blog
         </a>
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
+            <a class="nav-link" href="/admin" target="blank">管理画面へ</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Projects</a>
           </li>
+          <!--Dropdown-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" data-mdb-toggle="dropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">投稿</a>
+            <ul class="dropdown-menu dropdown-primary" aria-labelledby="navarDropdownMenuLnk">
+              <li><a class="dropdown-item" href="{% url 'myapp:post_create' %}">新規投稿</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <!--Dropdown-->
+
+
         </ul>
         <!-- Left links -->
       </div>
       <!-- Collapsible wrapper -->
 
-      <!-- Right elements -->
-      <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <a class="text-reset me-3" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
-
-        <!-- Notifications -->
-        <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
-          data-mdb-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-bell"></i>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-          <li>
-            <a class="dropdown-item" href="#">Some news</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Another news</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </li>
-        </ul>
-
-        <!-- Avatar -->
-        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink"
-          role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-          <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-circle" height="25" alt=""
-            loading="lazy" />
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-          <li>
-            <a class="dropdown-item" href="#">My profile</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Settings</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Logout</a>
-          </li>
-        </ul>
-      </div>
-      <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
   </nav>
@@ -102,54 +69,66 @@
   <!-- Start your project here-->
   <header>
 
-<main class = 'container'>
- {% block content %}
- {% endblock %}
 
-</main>
+  <main class='container'>
 
-  <footer class="text-center text-white" style="background-color: #f1f1f1;">
-    <!-- Grid container -->
-    <div class="container pt-4">
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <!-- Facebook -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+    {% if messages %}
+    <br>
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
 
-        <!-- Twitter -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+    {% endif %}
 
-        <!-- Google -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+    {% block content %}
+    {% endblock %}
 
-        <!-- Instagram -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+  </main>
 
-        <!-- Linkedin -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
-        <!-- Github -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
-      </section>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+      <!-- Grid container -->
+      <div class="container pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
 
-    <!-- Copyright -->
-    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2021 Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
+          <!-- Twitter -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
 
-  <!-- MDB -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+          <!-- Google -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+          <!-- Instagram -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+          <!-- Linkedin -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+          <!-- Github -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
 
 </body>
 

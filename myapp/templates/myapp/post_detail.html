@@ -1,0 +1,26 @@
+{% extends 'myapp/base.html'%}
+
+{% block content %}
+<br>
+<br>
+<div class=row>
+
+  <div class="col-md-9">
+    <!--Card-->
+    <div class="card">
+      <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <p class="card-text">
+          {{ object.content }}
+        </p>
+        <a href="{% url 'myapp:post_update' object.id %}" class="btn btn-primary">編集</a>
+      </div>
+    </div>
+    <!--Card-->
+  </div>
+
+</div>
+<br>
+<br>
+{% endblock %}
