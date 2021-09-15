@@ -48,8 +48,7 @@
               data-bs-toggle="dropdown" aria-expanded="false">投稿</a>
             <ul class="dropdown-menu dropdown-primary" aria-labelledby="navarDropdownMenuLnk">
               <li><a class="dropdown-item" href="{% url 'myapp:post_create' %}">新規投稿</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="{% url 'myapp:post_list' %}">投稿一覧</a></li>
             </ul>
           </li>
           <!--Dropdown-->
