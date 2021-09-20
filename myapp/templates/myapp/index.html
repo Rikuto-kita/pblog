@@ -1,33 +1,41 @@
 {% extends 'myapp/base.html'%}
 
 {% block content %}
-    <!-- Jumbotron -->
-    <div class="p-5 text-center bg-light">
-      <h1 class="mb-3">Heading</h1>
-      <h4 class="mb-3">Subheading</h4>
-    </div>
-    <!-- Jumbotron -->
-  </header>
-  <!-- End your project here-->
+<!-- Jumbotron -->
+<div class="p-5 text-center bg-light">
+  <h1 class="mb-3">Heading</h1>
+  <h4 class="mb-3">Subheading</h4>
+</div>
+<!-- Jumbotron -->
+</header>
+<!-- End your project here-->
 
 
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for item in post_list %}
-    <div class="col">
-      <div class="card">
-        <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{{ item.title }}<small>{{ item.author }}</small></h5>
-          <p>{{ item.category }}</p>
-          <p class="card-text">
-              {{ item.content }}
-          </p>
-          <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn btn-info btn-md">読む</a>
-        </div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for item in post_list %}
+  <div class="col">
+    <div class="card">
+      {% if item.thumbnail %}
+      <a href="{% url 'myapp:post_detail' item.id %}">
+        <img src="{{ item.thumbnail.url }}" class="card-img-top" alt="{{ item.title }}" />
+      </a>
+      {% else %}
+      <a href="{% url 'myapp:post_detail' item.id %}">
+        <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg" class="card-img-top" alt="{{ item.title }}" />
+      </a>
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ item.title }}<small>{{ item.author }}</small></h5>
+        <p>{{ item.category }}</p>
+        <p class="card-text">
+          {{ item.content }}
+        </p>
+        <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn btn-info btn-md">読む</a>
       </div>
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
+</div>
 
 {% endblock %}

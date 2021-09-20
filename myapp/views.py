@@ -4,12 +4,13 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView,CreateView,DetailView,UpdateView,DeleteView,ListView
 from .models import Post,Like,Category
 from django.urls import reverse_lazy
-from .forms import PostForm,LoginForm, SignupForm
+from .forms import PostForm,LoginForm, SignupForm,SearchForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 
@@ -141,4 +142,17 @@ class CategoryDetail(DetailView):
     return params
 
 
+def Search(request):
+  if request.method == 'POST':
+    searchform = SearchForm(request.POST)
+
+    if searchform.is_valid():
+      freeword = searchform.cleaned_data['freeword']
+      search_list = Post.objects.filter(Q(title__icontains = freeword)|Q(content__icontains = freeword))
+
+    params = {
+      'search_list': search_list,
+    }
+
+    return render (request, 'myapp/search.html',params)
 
