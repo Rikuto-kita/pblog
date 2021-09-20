@@ -21,8 +21,11 @@
         <a class="btn" href="{% url 'myapp:like_add' object.id %}"
           style="background-color: #ff6699;color: white;">お気に入り</a>
         <hr>
+        <a href="javascript:void(0);"onclick = "window.history.back();" class="btn btn-outline-dark">戻る</a>
+        {% if object.author == request.user %}
         <a href="{% url 'myapp:post_update' object.id %}" class="btn btn-primary">編集</a>
         <a href="{% url 'myapp:post_delete' object.id %}" class="btn btn-danger">削除</a>
+        {% endif %}
       </div>
     </div>
     <!--Card-->

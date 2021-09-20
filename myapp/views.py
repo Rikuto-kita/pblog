@@ -11,6 +11,7 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 
@@ -79,6 +80,7 @@ class PostDelete(OnlyMyPostMixin,DeleteView):
 
 class PostList(ListView):
   model = Post
+  paginate_by = 5
 
   def get_queryset(self):
     return Post.objects.all().order_by('-created_at')
