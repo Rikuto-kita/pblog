@@ -16,7 +16,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ object.title }}</h5>
         <p class="card-text">
-          {{ object.content }}
+          {{ object.content| safe | linebreaksbr | urlize }}
         </p>
         <a class="btn" href="{% url 'myapp:like_add' object.id %}"
           style="background-color: #ff6699;color: white;">お気に入り</a>

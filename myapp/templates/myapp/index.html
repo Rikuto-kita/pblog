@@ -3,8 +3,8 @@
 {% block content %}
 <!-- Jumbotron -->
 <div class="p-5 text-center bg-light">
-  <h1 class="mb-3">Heading</h1>
-  <h4 class="mb-3">Subheading</h4>
+  <h1 class="mb-3">{{ request.site.siteconfig.top_title }}</h1>
+  <h4 class="mb-3">{{ request.site.siteconfig.top_subtitle}}</h4>
 </div>
 <!-- Jumbotron -->
 </header>
@@ -29,7 +29,7 @@
         <h5 class="card-title">{{ item.title }}<small>{{ item.author }}</small></h5>
         <p>{{ item.category }}</p>
         <p class="card-text">
-          {{ item.content }}
+          {{ item.content | safe |truncatechars_html:50 }}
         </p>
         <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn btn-info btn-md">読む</a>
       </div>
