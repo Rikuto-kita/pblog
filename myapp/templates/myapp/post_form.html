@@ -7,7 +7,7 @@
     <br>
 
     <h2>投稿・更新ページ</h2>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
       <!-- ジャンゴの決まりCSRF検証-->
       {% csrf_token %}
       <br>
@@ -15,7 +15,10 @@
         <label>タイトル</label>
         {{ form.title }}
       </div>
-      
+      <div class = "form-groap">
+        <label>カテゴリ</label>
+        {{ form.category }}
+      </div>
       <br>
       <div class ="form-groap">
         <label>内容</label>
