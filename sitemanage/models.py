@@ -14,5 +14,5 @@ class SiteConfig(models.Model):
 
 
 
-def __str__(self):
-  return self.meta_title
+  def __str__(self):
+    return self.meta_title
