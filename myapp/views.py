@@ -26,7 +26,7 @@ class Index(TemplateView):
 
   def get_context_data(self, *args, **kwargs):
     context = super().get_context_data(**kwargs)
-    post_list = Post.objects.all().order_by('-created_at')
+    post_list = Post.objects.all().order_by('-created_at')[:10]
     context = {
       'post_list': post_list,
     }
