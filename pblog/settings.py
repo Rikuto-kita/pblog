@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'myapp',
     'django.contrib.sites',
     'sitemanage',
+    'storages',
 ]
 
 SITE_ID = 1
@@ -138,9 +139,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'myapp:login'
 LOGIN_REDIRECT_URL = 'myapp:index'
 
-# 画像や動画ファイルを置くMEDIAをどこに置くか設定
+# S3の記述
+AWS_STORAGE_BUCKET_NAME = 'pblog0430'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME 
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max_age=86400',#１日はそのキャッシュを使う
+}
+
+AWS_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+MEDIA_URL = "https://%s/%s/"(AWS_S3_CUSTOM_DOMAIN,AWS_LOCATION)
 
 
 
@@ -166,3 +176,6 @@ except ImportError:
 
 if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+
